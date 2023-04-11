@@ -1,0 +1,76 @@
+<div class="form-group">
+    <form [formGroup]="signInForm" *ngIf="signInForm" (ngSubmit)="onSubmit(signInForm.value)">
+
+        <label for="name">User name:</label>
+        <input class="alert " type="text" class="form-control" id="name" required name="name"
+            formControlName="username">
+        <div *ngIf="signInForm.controls['username'].invalid && (signInForm.controls['username'].dirty || signInForm.controls['username'].touched)"
+            class="alert-danger">
+
+            <small *ngIf="signInForm.controls['username'].errors?.['required']">
+                Username is required.
+            </small>
+        </div>
+
+
+        <label for="email">Email:</label>
+        <input class="alert " type="email" class="form-control" id="email" required name="email"
+            formControlName="email">
+        <div *ngIf="signInForm.controls['email'].invalid && (signInForm.controls['email'].dirty || signInForm.controls['email'].touched)"
+            class="alert-danger">
+
+            <small *ngIf="signInForm.controls['email'].errors?.['required']">
+                Email is required.
+            </small>
+            <small *ngIf="signInForm.controls['email'].errors?.['pattern']">
+                Email is not valid.
+            </small>
+        </div>
+
+
+
+        <label for="password">Password:</label>
+        <input class="alert " type="password" class="form-control" id="password" required name="password"
+            formControlName="password">
+        <div *ngIf="signInForm.controls['password'].invalid && (signInForm.controls['password'].dirty || signInForm.controls['password'].touched )"
+            class="alert-danger">
+
+            <small *ngIf="signInForm.controls['password'].errors?.['required']">
+                Password is required.
+            </small>
+            <small *ngIf="signInForm.controls['password'].errors?.['pattern']">
+                Password must contain one uppercase , one lowercase , one number, one special character.
+            </small>
+            <small *ngIf="!signInForm.controls['password'].errors?.['minLength']">
+                Password must contain minimum 8 character.
+            </small>
+        </div>
+
+        <label for="cnfrmpassword">Comfirm password:</label>
+        <input class="alert " type="password" class="form-control" id="cnfrmpassword" required name="name"
+            formControlName="cnfrmpassword">
+        <div *ngIf="signInForm.controls['cnfrmpassword'].invalid && (signInForm.controls['cnfrmpassword'].dirty || signInForm.controls['cnfrmpassword'].touched )"
+            class="alert-danger">
+
+            <small *ngIf="signInForm.controls['cnfrmpassword'].errors?.['required']">
+                Confirm Password is required.
+            </small>
+            <small *ngIf="signInForm.controls['cnfrmpassword'].errors?.['confirmPasswordValidator']">
+                Confirm Password must be same as password
+            </small>
+        </div>
+
+        <!-- <button>Add more info</button> -->
+
+        <!-- <div class="addmore">
+                <label for="dob">Date of birth:</label>
+        <input type="date" class="form-control" id="dob" required name="name"
+            formControlName="dob">
+            </div> -->
+
+        <button type="submit" [disabled]="!signInForm.valid">Sign Up</button>
+    </form>
+    <p>Form Status: {{ signInForm.status }}</p>
+
+
+</div>
